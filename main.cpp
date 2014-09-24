@@ -32,6 +32,35 @@ void ConvertPNGToSVG(const char* srcPath,const char* dstPath){
         fprintf(svgFile,"<rect fill=\"#%02x%02x%02x\" x=\"%d\" y=\"%d\" width=\"%.1f\" height=\"%.1f\" />\n",red,green,blue,j,i,1.5,1.5);
     }
 
+
+    //Last line
+    for(int i=image->GetHeight()-1 ; i < image->GetHeight() ; i++)
+    for(int j=0 ; j < image->GetWidth()-1  ; j++)
+    {
+        uint8_t red   = bytes[(i*image->GetWidth()+j)*image->GetBpp()+0];
+    	uint8_t green = bytes[(i*image->GetWidth()+j)*image->GetBpp()+1];
+    	uint8_t blue  = bytes[(i*image->GetWidth()+j)*image->GetBpp()+2];
+
+        fprintf(svgFile,"<rect fill=\"#%02x%02x%02x\" x=\"%d\" y=\"%d\" width=\"%.1f\" height=\"%d\" />\n",red,green,blue,j,i,1.5,1);
+    }
+
+    //Last column
+    for(int i=0 ; i < image->GetHeight()-1 ; i++)
+    for(int j=image->GetWidth() ; j < image->GetWidth()-1  ; j++)
+    {
+        uint8_t red   = bytes[(i*image->GetWidth()+j)*image->GetBpp()+0];
+    	uint8_t green = bytes[(i*image->GetWidth()+j)*image->GetBpp()+1];
+    	uint8_t blue  = bytes[(i*image->GetWidth()+j)*image->GetBpp()+2];
+
+        fprintf(svgFile,"<rect fill=\"#%02x%02x%02x\" x=\"%d\" y=\"%d\" width=\"%d\" height=\"%.1f\" />\n",red,green,blue,j,i,1,1.5);
+    }
+
+        uint8_t red   = bytes[(image->GetHeight()*image->GetWidth()-1)*image->GetBpp()+0];
+    	uint8_t green = bytes[(image->GetHeight()*image->GetWidth()-1)*image->GetBpp()+1];
+    	uint8_t blue  = bytes[(image->GetHeight()*image->GetWidth()-1)*image->GetBpp()+2];
+    fprintf(svgFile,"<rect fill=\"#%02x%02x%02x\" x=\"%lu\" y=\"%lu\" width=\"%d\" height=\"%d\" />\n",red,green,blue,image->GetWidth() -1,image->GetHeight()-1,1,1);
+
+
     fprintf(svgFile,"</svg>");
     fclose(svgFile);
 }
