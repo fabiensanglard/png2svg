@@ -6,8 +6,8 @@ img2svg: main.o Image.o ImagePNG.o ImageTGA.o ByteStream.o
 Image.o: ImageTGA.o ImagePNG.o Image.cpp
 	clang++ ImagePNG.o ImageTGA.o -c Image.cpp
 
-main.o: main.cpp
-	clang++ -c main.cpp
+main.o: main.cpp Image.o
+	clang++ Image.o -c main.cpp
 
 ImagePNG.o: ImagePNG.cpp
 	clang++ -lpng -c ImagePNG.cpp 

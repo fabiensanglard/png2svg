@@ -21,15 +21,13 @@ void ConvertPNGToSVG(const char* srcPath,const char* dstPath){
     
     uint8_t* bytes = image->GetBytes();
 
-    for(int i=0 ; i < image->GetHeight() ; i++)
-    for(int j=0 ; j < image->GetWidth()  ; j++)
+    for(int i=0 ; i < image->GetHeight()-1 ; i++)
+    for(int j=0 ; j < image->GetWidth() -1 ; j++)
     {
-    	uint8_t red = *bytes++;
-    	uint8_t green = *bytes++;
-    	uint8_t blue = *bytes++;
+        uint8_t red   = bytes[(i*image->GetWidth()+j)*image->GetBpp()+0];
+    	uint8_t green = bytes[(i*image->GetWidth()+j)*image->GetBpp()+1];
+    	uint8_t blue  = bytes[(i*image->GetWidth()+j)*image->GetBpp()+2];
     	
-    	if (image->GetBpp() == 4)
-    		bytes++;
 
         fprintf(svgFile,"<rect fill=\"#%02x%02x%02x\" x=\"%d\" y=\"%d\" width=\"%d\" height=\"%d\" />\n",red,green,blue,j,i,1,1);
     }
