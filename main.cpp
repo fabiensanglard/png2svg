@@ -29,7 +29,7 @@ void ConvertPNGToSVG(const char* srcPath,const char* dstPath){
     	uint8_t blue  = bytes[(i*image->GetWidth()+j)*image->GetBpp()+2];
     	
 
-        fprintf(svgFile,"<rect fill=\"#%02x%02x%02x\" x=\"%d\" y=\"%d\" width=\"%d\" height=\"%d\" />\n",red,green,blue,j,i,1,1);
+        fprintf(svgFile,"<rect fill=\"#%02x%02x%02x\" x=\"%d\" y=\"%d\" width=\"%.1f\" height=\"%.1f\" />\n",red,green,blue,j,i,1.5,1.5);
     }
 
     fprintf(svgFile,"</svg>");
